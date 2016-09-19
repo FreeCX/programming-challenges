@@ -2,7 +2,7 @@
 
 ![challenges](https://i.imgur.com/2n1IBkC.png)
 
-#### How to compile
+## How to compile
 For first time you need to generate `Cargo.toml` file.
 ```bash
 $ python build.py
