@@ -1,4 +1,5 @@
-// add sound generator
+// sound generation
+// - https://freecx.github.io/blog/2016/09/07/sound-generator-for-morse (RUS)
 #[macro_use]
 extern crate lazy_static;
 
