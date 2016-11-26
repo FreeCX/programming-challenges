@@ -25,3 +25,5 @@ $ cargo run --bin 43-morse
 ## Extra
 * [24 - Decimal/Binary Converter](https://github.com/FreeCX/rust-by-example/blob/master/src/digit/main.rs)
 * [43 - Text/Morse Translator](https://freecx.github.io/blog/2016/09/07/sound-generator-for-morse) (RUS, article)
+* [55 - RPN Calculator](https://github.com/FreeCX/rust-by-example/blob/master/src/rpn/main.rs)
+* [76 - Brainfuck Interpreter](https://github.com/FreeCX/rust-by-example/blob/master/src/brainfuck/main.rs) (incomplete)
