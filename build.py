@@ -1,4 +1,4 @@
-#!/bin/env/python3
+#!/bin/env/python
 from os import listdir
 from os.path import splitext
 
@@ -7,7 +7,28 @@ CARGO_CONF = (
     ('version', '"0.1.0"'),
     ('authors', '["Alexey Golubev <dr.freecx@gmail.com>"]')
 )
-CARGO_DEPS = (('lazy_static', '"*"'), )
+CARGO_DEPS = (('lazy_static', '"*"'), ('time', '"*"'))
+CARGO_EXTRA = (
+    ('sdl2', {
+        'version': '"*"',
+        'default-features': 'false',
+        'features': ['ttf']
+    }),
+)
+
+
+def extra(extra_list):
+    result = ''
+    for item in extra_list:
+        name, extra = item
+        result += f'[dependencies.{name}]\n'
+        for k, v in extra.items():
+            if type(v) is list:
+                result += f'{k} = [' + ','.join(map(lambda x: f'"{x}"', v)) + ']'
+            else:
+                result += f'{k} = {v}\n'
+    return result
+
 
 if __name__ == '__main__':
     binary = lambda f: '[[bin]]\nname = "{}"\n'.format(splitext(f)[0])
@@ -17,3 +38,4 @@ if __name__ == '__main__':
         f.write('[package]\n{}\n'.format(config(CARGO_CONF)))
         f.write('\n{}\n'.format('\n'.join(binaries)))
         f.write('[dependencies]\n{}'.format(config(CARGO_DEPS)))
+        f.write('\n\n{}'.format(extra(CARGO_EXTRA)))
