@@ -1,12 +1,15 @@
 extern crate sdl2;
 extern crate time;
 
+mod font;
+
 use sdl2::pixels::Color;
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
-use sdl2::render::{Renderer, TextureQuery};
-use sdl2::rect::{Rect, Point};
+use sdl2::render::Renderer;
+use sdl2::rect::Point;
 use sdl2::ttf::Font;
+use font::print_text;
 
 const W_WIDTH: u32 = 320;
 const W_HEIGHT: u32 = 320;
@@ -20,16 +23,6 @@ fn get_point(center: Point, angle: f32, amplitute: f32) -> Point {
     let x = center.x + (amplitute * (angle - FRAC_PI_2).cos()).round() as i32;
     let y = center.y + (amplitute * (angle - FRAC_PI_2).sin()).round() as i32;
     Point::new(x, y)
-}
-
-fn print_text<'a>(renderer: &'a mut Renderer, font: &'a Font, text: &'a str, pos: Point) {
-    let surface = font.render(text)
-                      .blended(Color::RGBA(255, 255, 255, 255))
-                      .unwrap();
-    let mut texture = renderer.create_texture_from_surface(&surface).unwrap();
-    let TextureQuery { width, height, .. } = texture.query();
-    let target = Rect::new(pos.x, pos.y, width, height);
-    renderer.copy(&mut texture, None, Some(target)).unwrap();
 }
 
 fn render<'a>(renderer: &'a mut Renderer, font: &'a mut Font) {
