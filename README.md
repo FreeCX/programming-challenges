@@ -3,19 +3,19 @@
 ![challenges](https://i.imgur.com/2n1IBkC.png)
 
 ## How to compile
-For first time you need to generate `Cargo.toml` file.
+To build a project, you need to generate a `Cargo.toml` file
 ```bash
 $ python build.py
 ```
 
-Now you may use `cargo` for compile binaries.
+Now you may use `cargo` command for compiling!
 
-For example let compile `43-morse.rs`:
+For example, let's compile `43-morse.rs` code:
 ```bash
 $ cargo build --bin 43-morse
 ```
 
-And run binary.
+And run for execution
 ```bash
 $ cargo run --bin 43-morse
      Running `target/debug/43-morse`
