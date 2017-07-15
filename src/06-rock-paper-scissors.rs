@@ -44,7 +44,7 @@ impl PartialOrd for Figure {
 }
 
 impl FromStr for Figure {
-    type Err = ();
+    type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         use Figure::*;
@@ -52,7 +52,7 @@ impl FromStr for Figure {
             "r" | "rock" => Ok(Rock),
             "p" | "paper" => Ok(Paper),
             "s" | "scissors" => Ok(Scissors),
-            _ => Err(())
+            figure => Err(format!("unknown `{}` figure", figure))
         }
     }
 }
@@ -63,7 +63,7 @@ impl Figure {
             0 => Figure::Rock,
             1 => Figure::Paper,
             2 => Figure::Scissors,
-            _ => panic!("unknown figure index")
+            index => panic!("something went wrong: unknown figure index ({})!", index)
         }
     }
 }
@@ -74,10 +74,20 @@ fn main() {
     let mut buffer = String::new();
     loop {
         let computer_figure = Figure::select((rng.rand() % 3) as u8);
-        println!("[?] Rock, paper or scissors ?");
-        io::stdin().read_line(&mut buffer)
-                   .unwrap();
-        let user_figure = Figure::from_str(&buffer.to_lowercase()).unwrap();
+        let mut user_figure = Figure::Rock;
+        'select_loop: loop {
+            println!("[?] Rock, paper or scissors ?");
+            io::stdin().read_line(&mut buffer)
+                       .unwrap();
+            match Figure::from_str(&buffer.to_lowercase()) {
+                Ok(figure) => {
+                    user_figure = figure;
+                    break 'select_loop;
+                }
+                Err(err) => println!("[error]: {}", err)
+            }
+            buffer.clear();
+        }
         let result = if computer_figure > user_figure {
             "computer wins!"
         } else if computer_figure == user_figure {
