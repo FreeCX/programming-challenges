@@ -31,7 +31,7 @@ def extra(extra_list):
 
 
 if __name__ == '__main__':
-    binary = lambda f: '[[bin]]\nname = "{}"\n'.format(splitext(f)[0])
+    binary = lambda f: '[[bin]]\nname = "{0}"\npath = "src/{0}.rs"\n'.format(splitext(f)[0])
     config = lambda d: '\n'.join(map(lambda l: '{} = {}'.format(*l), d))
     binaries = map(lambda f: binary(f), filter(lambda f: splitext(f)[1] == '.rs', listdir('src/')))
     with open('Cargo.toml', 'w') as f:
