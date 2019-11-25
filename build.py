@@ -10,7 +10,7 @@ CARGO_CONF = (
 CARGO_DEPS = (('lazy_static', '"*"'), ('time', '"*"'))
 CARGO_EXTRA = (
     ('sdl2', {
-        'version': '"0.29.1"',
+        'version': '"*"',
         'default-features': 'false',
         'features': ['ttf']
     }),

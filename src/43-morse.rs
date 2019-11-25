@@ -70,10 +70,10 @@ impl MorseConverter {
         }
     }
     fn return_error_code() -> String {
-        format!("{}", ERROR_CODE.to_string())
+        format!("{}", *ERROR_CODE)
     }
     fn end_transmission(&self) -> String {
-        format!("{}{}", self.text, END_TRANSMISSION.to_string())
+        format!("{}{}", self.text, *END_TRANSMISSION)
     }
 }
 

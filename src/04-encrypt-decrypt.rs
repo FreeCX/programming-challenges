@@ -3,7 +3,7 @@ fn cesar_encrypt(text: &str, shift: u8) -> String {
     let mut buffer = String::with_capacity(n as usize);
     for character in text.to_lowercase().chars() {
         buffer.push(match character {
-            'a'...'z' => (((character as u8 - 'a' as u8 + shift) % n) + 'a' as u8) as char,
+            'a'..='z' => (((character as u8 - 'a' as u8 + shift) % n) + 'a' as u8) as char,
             _ => character
         });
     }
