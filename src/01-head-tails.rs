@@ -18,13 +18,7 @@ fn main() {
             _ => None
         };
         match select {
-            Some(v) => {
-                if v == coin {
-                    println!("[!] You win!");
-                } else {
-                    println!("[!] You lose!");
-                }
-            },
+            Some(v) => println!("[!] You {}!", if v == coin { "win" } else { "lose" }),
             None => println!("[!] Unknown command `{}`! Please use h|head|t|tail!", buffer.trim())
         };
         buffer.clear();

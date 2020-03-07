@@ -3,8 +3,8 @@ pub mod pseudo;
 use std::time::SystemTime;
 use pseudo::Rng;
 
-fn generate(gen: &mut Rng, alphabet: &str, length: u32) -> String {
-    let mut password = String::new();
+fn generate(gen: &mut Rng, alphabet: &str, length: usize) -> String {
+    let mut password = String::with_capacity(length);
     let max_index = alphabet.len() as u32;
     for _ in 0..length {
         let index = (gen.rand() % max_index) as usize;

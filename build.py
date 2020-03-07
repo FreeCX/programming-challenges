@@ -1,6 +1,6 @@
-#!/bin/env/python
-from os import listdir
-from os.path import splitext
+#!/bin/env/python3
+from pathlib import Path
+
 
 CARGO_CONF = (
     ('name', '"programming-challenges"'),
@@ -18,22 +18,21 @@ CARGO_EXTRA = (
 
 
 def extra(extra_list):
-    result = ''
+    r = ''
+    fx = lambda x: f'"{x}"'
     for item in extra_list:
         name, extra = item
-        result += f'[dependencies.{name}]\n'
+        r += f'[dependencies.{name}]\n'
         for k, v in extra.items():
-            if type(v) is list:
-                result += f'{k} = [' + ','.join(map(lambda x: f'"{x}"', v)) + ']'
-            else:
-                result += f'{k} = {v}\n'
-    return result
+            r += f'{k} = [' + ','.join(map(fx, v)) + ']' if isinstance(k, list) else f'{k} = {v}\n'
+    return r
 
 
 if __name__ == '__main__':
-    binary = lambda f: '[[bin]]\nname = "{0}"\npath = "src/{0}.rs"\n'.format(splitext(f)[0])
+    binary = lambda f: f'[[bin]]\nname = "{f.stem}"\npath = "{f}"\n'
     config = lambda d: '\n'.join(map(lambda l: '{} = {}'.format(*l), d))
-    binaries = map(lambda f: binary(f), filter(lambda f: splitext(f)[1] == '.rs', listdir('src/')))
+    split = lambda f: f.suffix == '.rs'
+    binaries = sorted(map(binary, filter(split, Path('./src').iterdir())))
     with open('Cargo.toml', 'w') as f:
         f.write('[package]\n{}\n'.format(config(CARGO_CONF)))
         f.write('\n{}\n'.format('\n'.join(binaries)))
