@@ -7,14 +7,14 @@ struct Kelvin(f32);
 
 impl From<Celcius> for Fahrenheit {
     fn from(t: Celcius) -> Fahrenheit {
-        Fahrenheit(9.0/5.0 * t.0 + 32.0)
+        Fahrenheit(9.0 / 5.0 * t.0 + 32.0)
     }
 }
 
 impl From<Celcius> for Kelvin {
     fn from(t: Celcius) -> Kelvin {
         Kelvin(t.0 + 273.15)
-    } 
+    }
 }
 
 impl From<Kelvin> for Celcius {
@@ -25,7 +25,7 @@ impl From<Kelvin> for Celcius {
 
 impl From<Fahrenheit> for Celcius {
     fn from(t: Fahrenheit) -> Celcius {
-        Celcius(5.0/9.0 * (t.0 - 32.0))
+        Celcius(5.0 / 9.0 * (t.0 - 32.0))
     }
 }
 

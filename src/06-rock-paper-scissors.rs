@@ -1,17 +1,17 @@
 #![allow(dead_code)]
 pub mod pseudo;
 
-use std::time::SystemTime;
-use std::cmp::Ordering;
-use std::str::FromStr;
 use pseudo::Rng;
+use std::cmp::Ordering;
 use std::io;
+use std::str::FromStr;
+use std::time::SystemTime;
 
 #[derive(Debug, Eq, Copy, Clone)]
 enum Figure {
     Rock,
     Paper,
-    Scissors
+    Scissors,
 }
 
 impl Ord for Figure {
@@ -26,7 +26,7 @@ impl Ord for Figure {
             (&Paper, &Scissors) => Ordering::Less,
             (&Scissors, &Rock) => Ordering::Less,
             (&Scissors, &Paper) => Ordering::Greater,
-            (&Scissors, &Scissors) => Ordering::Equal
+            (&Scissors, &Scissors) => Ordering::Equal,
         }
     }
 }
@@ -52,7 +52,7 @@ impl FromStr for Figure {
             "r" | "rock" => Ok(Rock),
             "p" | "paper" => Ok(Paper),
             "s" | "scissors" => Ok(Scissors),
-            figure => Err(format!("unknown `{}` figure", figure))
+            figure => Err(format!("unknown `{}` figure", figure)),
         }
     }
 }
@@ -63,7 +63,7 @@ impl Figure {
             0 => Figure::Rock,
             1 => Figure::Paper,
             2 => Figure::Scissors,
-            index => panic!("something went wrong: unknown figure index ({})!", index)
+            index => panic!("something went wrong: unknown figure index ({})!", index),
         }
     }
 }
@@ -77,14 +77,13 @@ fn main() {
         let mut user_figure = Figure::Rock;
         'select_loop: loop {
             println!("[?] Rock, paper or scissors ?");
-            io::stdin().read_line(&mut buffer)
-                       .unwrap();
+            io::stdin().read_line(&mut buffer).unwrap();
             match Figure::from_str(&buffer.to_lowercase()) {
                 Ok(figure) => {
                     user_figure = figure;
                     break 'select_loop;
                 }
-                Err(err) => println!("[error]: {}", err)
+                Err(err) => println!("[error]: {}", err),
             }
             buffer.clear();
         }
@@ -98,8 +97,7 @@ fn main() {
         println!(">>> {:?} vs {:?}: {}", computer_figure, user_figure, result);
         buffer.clear();
         println!("[?] Again (y|yes|n|no)?");
-        io::stdin().read_line(&mut buffer)
-                   .unwrap();
+        io::stdin().read_line(&mut buffer).unwrap();
         match buffer.to_lowercase().trim() {
             "n" | "no" => break,
             _ => {}

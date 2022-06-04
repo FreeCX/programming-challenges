@@ -1,8 +1,8 @@
 pub mod pseudo;
 
-use std::time::SystemTime;
-use std::io;
 use pseudo::Rng;
+use std::io;
+use std::time::SystemTime;
 
 fn main() {
     let time = SystemTime::now().elapsed().unwrap();
@@ -15,11 +15,11 @@ fn main() {
         let select = match buffer.to_lowercase().trim() {
             "h" | "head" => Some(0),
             "t" | "tail" => Some(1),
-            _ => None
+            _ => None,
         };
         match select {
             Some(v) => println!("[!] You {}!", if v == coin { "win" } else { "lose" }),
-            None => println!("[!] Unknown command `{}`! Please use h|head|t|tail!", buffer.trim())
+            None => println!("[!] Unknown command `{}`! Please use h|head|t|tail!", buffer.trim()),
         };
         buffer.clear();
         println!("[?] Again (y|yes|n|no)?");

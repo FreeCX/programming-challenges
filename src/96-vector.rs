@@ -1,10 +1,10 @@
-use std::ops::{ Mul, BitXor };
+use std::ops::{BitXor, Mul};
 
 #[derive(Debug, Clone, Copy)]
 pub struct Vec3 {
     pub x: f64,
     pub y: f64,
-    pub z: f64
+    pub z: f64,
 }
 
 impl Vec3 {
@@ -28,7 +28,7 @@ impl BitXor for Vec3 {
         Vec3::new(
             self.y * other.z - self.z * other.y,
             self.z * other.x - self.x * other.z,
-            self.x * other.y - self.y * other.x
+            self.x * other.y - self.y * other.x,
         )
     }
 }

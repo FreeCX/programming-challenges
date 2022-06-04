@@ -4,7 +4,7 @@ fn cesar_encrypt(text: &str, shift: u8) -> String {
     for character in text.to_lowercase().chars() {
         buffer.push(match character {
             'a'..='z' => (((character as u8 - 'a' as u8 + shift) % n) + 'a' as u8) as char,
-            _ => character
+            _ => character,
         });
     }
     buffer

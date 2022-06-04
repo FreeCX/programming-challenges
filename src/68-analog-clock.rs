@@ -3,13 +3,13 @@ extern crate time;
 
 mod font;
 
-use sdl2::pixels::Color;
+use font::print_text;
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
-use sdl2::render::Renderer;
+use sdl2::pixels::Color;
 use sdl2::rect::Point;
+use sdl2::render::Renderer;
 use sdl2::ttf::Font;
-use font::print_text;
 
 const W_WIDTH: u32 = 320;
 const W_HEIGHT: u32 = 320;
@@ -55,24 +55,18 @@ fn main() {
     let sdl_contex = sdl2::init().unwrap();
     let video_subsystem = sdl_contex.video().unwrap();
     let ttf_context = sdl2::ttf::init().unwrap();
-    let window = video_subsystem.window("analog clock", W_WIDTH, W_HEIGHT)
-                                .position_centered()
-                                .build()
-                                .unwrap();
-    let mut renderer = window.renderer()
-                             .present_vsync()
-                             .build()
-                             .unwrap();
+    let window = video_subsystem.window("analog clock", W_WIDTH, W_HEIGHT).position_centered().build().unwrap();
+    let mut renderer = window.renderer().present_vsync().build().unwrap();
     let mut font = ttf_context.load_font("assets/SourceSansPro-Regular.ttf", FONT_SIZE).unwrap();
     font.set_style(sdl2::ttf::STYLE_NORMAL);
     let mut event_pump = sdl_contex.event_pump().unwrap();
     'running: loop {
         for event in event_pump.poll_iter() {
             match event {
-                Event::Quit {..} | Event::KeyDown { keycode: Some(Keycode::Escape), ..} => {
+                Event::Quit { .. } | Event::KeyDown { keycode: Some(Keycode::Escape), .. } => {
                     break 'running;
                 }
-                _ => ()
+                _ => (),
             }
         }
         render(&mut renderer, &mut font);

@@ -22,6 +22,6 @@ fn main() {
     }
     println!("{:?}", result);
     let elapsed = sys_time.elapsed().unwrap();
-    
+
     println!("elapsed time: {:?}", elapsed);
 }

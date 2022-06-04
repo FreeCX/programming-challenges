@@ -1,12 +1,12 @@
 extern crate time;
 
-use std::io::{Read, Result};
 use std::fs::File;
+use std::io::{Read, Result};
 
 struct Digits {
     size: (usize, usize),
     alphabet: Vec<char>,
-    digits: Vec<String>
+    digits: Vec<String>,
 }
 
 impl Digits {
@@ -14,27 +14,18 @@ impl Digits {
         let mut file = File::open(filename).unwrap();
         let mut buffer = String::new();
         file.read_to_string(&mut buffer).unwrap();
-        let digit_size: Vec<usize> = buffer.lines()
-                                        .nth(0).unwrap().split('x')
-                                        .map(|x| x.parse().unwrap()).collect();
-        let alphabet: Vec<char> = buffer.lines()
-                                        .nth(1).unwrap()
-                                        .chars().collect();
+        let digit_size: Vec<usize> = buffer.lines().nth(0).unwrap().split('x').map(|x| x.parse().unwrap()).collect();
+        let alphabet: Vec<char> = buffer.lines().nth(1).unwrap().chars().collect();
         let mut digits: Vec<String> = Vec::new();
         for line in buffer.lines().skip(2) {
             digits.push(line.to_owned());
         }
-        Ok(Digits {
-            size: (digit_size[0], digit_size[1]),
-            alphabet, digits
-        })
+        Ok(Digits { size: (digit_size[0], digit_size[1]), alphabet, digits })
     }
 
     fn print_text(&self, text: &str) {
         let mut buffer = String::new();
-        let indexes: Vec<usize> = text.chars()
-                                      .map(|x| self.alphabet.binary_search(&x).unwrap())
-                                      .collect();
+        let indexes: Vec<usize> = text.chars().map(|x| self.alphabet.binary_search(&x).unwrap()).collect();
         for line in &self.digits {
             for index in &indexes {
                 let start_x = (self.size.0 + 1) * index;

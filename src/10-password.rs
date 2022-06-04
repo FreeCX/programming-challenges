@@ -1,7 +1,7 @@
 pub mod pseudo;
 
-use std::time::SystemTime;
 use pseudo::Rng;
+use std::time::SystemTime;
 
 fn generate(gen: &mut Rng, alphabet: &str, length: usize) -> String {
     let mut password = String::with_capacity(length);

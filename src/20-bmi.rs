@@ -2,14 +2,14 @@ use std::io;
 
 fn main() {
     let mut buffer = String::new();
-    
+
     println!("Введите массу тела, кг");
     io::stdin().read_line(&mut buffer).unwrap();
     let mass = match buffer.trim().parse::<f32>() {
         Ok(value) => value,
         Err(error) => panic!("{}", error),
     };
-    
+
     buffer.clear();
     println!("Введите рост, м");
     io::stdin().read_line(&mut buffer).unwrap();

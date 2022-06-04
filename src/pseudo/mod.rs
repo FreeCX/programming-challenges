@@ -7,12 +7,7 @@ pub struct Rng {
 
 impl Rng {
     pub fn new(seed: u32) -> Rng {
-        Rng {
-            x: seed,
-            y: 362_436_069,
-            z: 521_288_629,
-            w: 88_675_123,
-        }
+        Rng { x: seed, y: 362_436_069, z: 521_288_629, w: 88_675_123 }
     }
     pub fn rand(&mut self) -> u32 {
         let t = self.x ^ (self.x << 11);

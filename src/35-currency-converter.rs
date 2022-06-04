@@ -1,14 +1,12 @@
 use std::collections::HashMap;
 
 struct Converter {
-    val: HashMap<String, f64>
+    val: HashMap<String, f64>,
 }
 
 impl Converter {
     fn init() -> Converter {
-        Converter { 
-            val: HashMap::new()
-        }
+        Converter { val: HashMap::new() }
     }
 
     fn add_new<U: Into<String>, T: Into<f64>>(&mut self, fname: U, fvalue: T) {
@@ -18,11 +16,11 @@ impl Converter {
     fn convert<U: Into<String>, T: Into<f64>>(&self, fvalue: T, fname: U, tname: U) -> Option<f64> {
         let p1 = match self.val.get(&fname.into()) {
             Some(value) => value,
-            None => return None
+            None => return None,
         };
         let p2 = match self.val.get(&tname.into()) {
             Some(value) => value,
-            None => return None
+            None => return None,
         };
         Some(fvalue.into() * p1 / p2)
     }
